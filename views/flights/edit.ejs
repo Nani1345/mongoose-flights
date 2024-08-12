@@ -1,0 +1,49 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/flights/edit.css">
+<%- include('../partials/nav') %>
+
+<h1><%= title %></h1>
+<form id="new-form" action="/flights/<%=flight._id %>?_method=PUT" method="POST">
+    <label for="airline">Airline:</label>
+    <%= console.log(flight.airline) %>
+    <input type="tex" name="airline" id="airline" value ='<%=flight.airline%>'>
+    
+    <label for="airport">Airport:</label>
+    <input type="tex" name="airport" id="airport" value ='<%=flight.airport%>'>
+
+    <!-- <select name="airport" id="airport">
+        <option value="AUS">AUS</option>
+        <option value="DFW">DFW</option>
+        <option value="DEN">DEN</option>
+        <option value="LAX">LAX</option>
+        <option value="SAN">SAN</option>
+    </select> -->
+
+    <label for="flightNo">FlightNo:</label>
+    <input type="number" name="flightNo" id="flightNo" value="<%= flight.flightNo %>">
+
+    <label for="departs">Departs:</label>
+    <input type="Date" name="departs" id="departs" value="flight.departs">
+
+    <button type="submit">Save Flight</button>
+  
+    <!-- <label for="title-input">Title:</label>
+  <input type="text" name="title" id="title-input">
+  <label for="release-year-input">Release Year:</label>
+  <input type="text" name="releaseYear" id="release-year-input">
+  <label for="mpaa-rating-select">MPAA Rating:</label> -->
+  <!-- <select name="mpaaRating" id="mpaa-rating-select">
+    <option value="G">G</option>
+    <option value="PG">PG</option>
+    <option value="PG-13">PG-13</option>
+    <option value="R">R</option>
+  </select> -->
+  <!-- <label for="cast-input">Cast (separate actors with commas):</label>
+  <input type="text" name="cast" id="cast-input">
+  <label for="now-showing-checkbox">Now Showing:</label>
+  <input type="checkbox" name="nowShowing" id="now-showing-checkbox" checked>
+  <button type="submit">Add Flight</button> -->
+</form>
+</main>
+
+<%- include('../partials/footer') %>

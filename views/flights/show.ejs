@@ -1,0 +1,80 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/flights/show.css" />
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <section>
+    <div>Airline: </div>
+    <div>
+        <%=flight.airline %>
+        <a href="/flights/<%= flight._id %>/edit">
+            <button>Edit Flight</button>
+        </a>
+    </div>
+    <div>Flight Airport: </div>
+    <div><%=flight.airport %></div>
+    <div>FlightNo: </div>
+    <div><%= flight.flightNo %></div>
+    <div>Departs: </div>
+    <div><%= flight.departs %></div>
+
+    <div>Meal:</div>
+    <ul>
+      <% flight.meal.forEach(mealM => { %>
+        <li><%= mealM.name %></li>
+      <% }) %>
+    </ul>
+  </section>
+
+  <form id="add-to-meal" action="/flights/<%= flight._id %>/meals" method="POST">
+    <select name="mealId">
+      <% meals.forEach(meal => { %>
+        <option value="<%= meal._id %>"><%= meal.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add to Meal</button>
+  </form>
+
+
+  <% if (flight.tickets.length) { %>
+    <table id="ticketTable">
+      <thead>
+        <tr>
+          <th>Seat</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.tickets.forEach(function(ticket) { %>
+          <tr>
+            <td><%= ticket.seat %></td>
+            <td><%= ticket.price %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <h3>No Tickets Yet</h3>
+  <% } %>
+
+
+ 
+  <% // new markup below %>
+  <h2>Teckets</h2>
+  <form 
+    id="add-ticket-form"
+    action="/flights/<%= flight._id %>/tickets"
+    method="POST"
+  >
+    <label for="content-textarea">Seat:</label>
+    <input name="seat" required pattern="[A-F][1-9]\d?">
+    
+    <label for="price">Price:</label>
+    <input type="number" name="price" id='price' required pattern="[A-F][1-9]\d?">
+    <button type="submit">Add Tickets</button>
+  </form>
+
+</main>
+  
+<%- include('../partials/footer') %>
